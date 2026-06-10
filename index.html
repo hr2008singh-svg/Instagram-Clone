@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Instagram clone — feed, stories, search, and create post">
+    <link rel="stylesheet" href="index.css">
+    <title>Instagram</title>
+    
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+</head>
+
+<body>
+    
+    <input type="radio" name="app-panel" id="panel-home" class="state-input" checked>
+    <input type="radio" name="app-panel" id="panel-search" class="state-input">
+    <input type="radio" name="app-panel" id="panel-notifications" class="state-input">
+
+    <div class="app-layout">
+        <label for="panel-home" class="panel-dismiss" aria-label="Close panel"></label>
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <a href="#" class="logo-link">
+                    <!-- Logo -->
+                    <svg aria-label="Instagram" class="instagram-text-logo" fill="currentColor" height="29" role="img" viewBox="32 4 113 32" width="103">
+                        <path clip-rule="evenodd" d="M37.82 4.11c-2.32.97-4.86 3.7-5.66 7.13-1.02 4.34 3.21 6.17 3.56 5.57.4-.7-.76-.94-1-3.2-.3-2.9 1.05-6.16 2.75-7.58.32-.27.3.1.3.78l-.06 14.46c0 3.1-.13 4.07-.36 5.04-.23.98-.6 1.64-.33 1.9.32.28 1.68-.4 2.46-1.5a8.13 8.13 0 0 0 1.33-4.58c.07-2.06.06-5.33.07-7.19 0-1.7.03-6.71-.03-9.72-.02-.74-2.07-1.51-3.03-1.1Zm82.13 14.48a9.42 9.42 0 0 1-.88 3.75c-.85 1.72-2.63 2.25-3.39-.22-.4-1.34-.43-3.59-.13-5.47.3-1.9 1.14-3.35 2.53-3.22 1.38.13 2.02 1.9 1.87 5.16ZM96.8 28.57c-.02 2.67-.44 5.01-1.34 5.7-1.29.96-3 .23-2.65-1.72.31-1.72 1.8-3.48 4-5.64l-.01 1.66Zm-.35-10a10.56 10.56 0 0 1-.88 3.77c-.85 1.72-2.64 2.25-3.39-.22-.5-1.69-.38-3.87-.13-5.25.33-1.78 1.12-3.44 2.53-3.44 1.38 0 2.06 1.5 1.87 5.14Zm-13.41-.02a9.54 9.54 0 0 1-.87 3.8c-.88 1.7-2.63 2.24-3.4-.23-.55-1.77-.36-4.2-.13-5.5.34-1.95 1.2-3.32 2.53-3.2 1.38.14 2.04 1.9 1.87 5.13Zm61.45 1.81c-.33 0-.49.35-.61.93-.44 2.02-.9 2.48-1.5 2.48-.66 0-1.26-1-1.42-3-.12-1.58-.1-4.48.06-7.37.03-.59-.14-1.17-1.73-1.75-.68-.25-1.68-.62-2.17.58a29.65 29.65 0 0 0-2.08 7.14c0 .06-.08.07-.1-.06-.07-.87-.26-2.46-.28-5.79 0-.65-.14-1.2-.86-1.65-.47-.3-1.88-.81-2.4-.2-.43.5-.94 1.87-1.47 3.48l-.74 2.2.01-4.88c0-.5-.34-.67-.45-.7a9.54 9.54 0 0 0-1.8-.37c-.48 0-.6.27-.6.67 0 .05-.08 4.65-.08 7.87v.46c-.27 1.48-1.14 3.49-2.09 3.49s-1.4-.84-1.4-4.68c0-2.24.07-3.21.1-4.83.02-.94.06-1.65.06-1.81-.01-.5-.87-.75-1.27-.85-.4-.09-.76-.13-1.03-.11-.4.02-.67.27-.67.62v.55a3.71 3.71 0 0 0-1.83-1.49c-1.44-.43-2.94-.05-4.07 1.53a9.31 9.31 0 0 0-1.66 4.73c-.16 1.5-.1 3.01.17 4.3-.33 1.44-.96 2.04-1.64 2.04-.99 0-1.7-1.62-1.62-4.4.06-1.84.42-3.13.82-4.99.17-.8.04-1.2-.31-1.6-.32-.37-1-.56-1.99-.33-.7.16-1.7.34-2.6.47 0 0 .05-.21.1-.6.23-2.03-1.98-1.87-2.69-1.22-.42.39-.7.84-.82 1.67-.17 1.3.9 1.91.9 1.91a22.22 22.22 0 0 1-3.4 7.23v-.7c-.01-3.36.03-6 .05-6.95.02-.94.06-1.63.06-1.8 0-.36-.22-.5-.66-.67-.4-.16-.86-.26-1.34-.3-.6-.05-.97.27-.96.65v.52a3.7 3.7 0 0 0-1.84-1.49c-1.44-.43-2.94-.05-4.07 1.53a10.1 10.1 0 0 0-1.66 4.72c-.15 1.57-.13 2.9.09 4.04-.23 1.13-.89 2.3-1.63 2.3-.95 0-1.5-.83-1.5-4.67 0-2.24.07-3.21.1-4.83.02-.94.06-1.65.06-1.81 0-.5-.87-.75-1.27-.85-.42-.1-.79-.13-1.06-.1-.37.02-.63.35-.63.6v.56a3.7 3.7 0 0 0-1.84-1.49c-1.44-.43-2.93-.04-4.07 1.53-.75 1.03-1.35 2.17-1.66 4.7a15.8 15.8 0 0 0-.12 2.04c-.3 1.81-1.61 3.9-2.68 3.9-.63 0-1.23-1.21-1.23-3.8 0-3.45.22-8.36.25-8.83l1.62-.03c.68 0 1.29.01 2.19-.04.45-.02.88-1.64.42-1.84-.21-.09-1.7-.17-2.3-.18-.5-.01-1.88-.11-1.88-.11s.13-3.26.16-3.6c.02-.3-.35-.44-.57-.53a7.77 7.77 0 0 0-1.53-.44c-.76-.15-1.1 0-1.17.64-.1.97-.15 3.82-.15 3.82-.56 0-2.47-.11-3.02-.11-.52 0-1.08 2.22-.36 2.25l3.2.09-.03 6.53v.47c-.53 2.73-2.37 4.2-2.37 4.2.4-1.8-.42-3.15-1.87-4.3-.54-.42-1.6-1.22-2.79-2.1 0 0 .69-.68 1.3-2.04.43-.96.45-2.06-.61-2.3-1.75-.41-3.2.87-3.63 2.25a2.61 2.61 0 0 0 .5 2.66l.15.19c-.4.76-.94 1.78-1.4 2.58-1.27 2.2-2.24 3.95-2.97 3.95-.58 0-.57-1.77-.57-3.43 0-1.43.1-3.58.19-5.8.03-.74-.34-1.16-.96-1.54a4.33 4.33 0 0 0-1.64-.69c-.7 0-2.7.1-4.6 5.57-.23.69-.7 1.94-.7 1.94l.04-6.57c0-.16-.08-.3-.27-.4a4.68 4.68 0 0 0-1.93-.54c-.36 0-.54.17-.54.5l-.07 10.3c0 .78.02 1.69.1 2.09.08.4.2.72.36.91.15.2.33.34.62.4.28.06 1.78.25 1.86-.32.1-.69.1-1.43.89-4.2 1.22-4.31 2.82-6.42 3.58-7.16.13-.14.28-.14.27.07l-.22 5.32c-.2 5.37.78 6.36 2.17 6.36 1.07 0 2.58-1.06 4.2-3.74l2.7-4.5 1.58 1.46c1.28 1.2 1.7 2.36 1.42 3.45-.21.83-1.02 1.7-2.44.86-.42-.25-.6-.44-1.01-.71-.23-.15-.57-.2-.78-.04-.53.4-.84.92-1.01 1.55-.17.61.45.94 1.09 1.22.55.25 1.74.47 2.5.5 2.94.1 5.3-1.42 6.94-5.34.3 3.38 1.55 5.3 3.72 5.3 1.45 0 2.91-1.88 3.55-3.72.18.75.45 1.4.8 1.96 1.68 2.65 4.93 2.07 6.56-.18.5-.69.58-.94.58-.94a3.07 3.07 0 0 0 2.94 2.87c1.1 0 2.23-.52 3.03-2.31.09.2.2.38.3.56 1.68 2.65 4.93 2.07 6.56-.18l.2-.28.05 1.4-1.5 1.37c-2.52 2.3-4.44 4.05-4.58 6.09-.18 2.6 1.93 3.56 3.53 3.69a4.5 4.5 0 0 0 4.04-2.11c.78-1.15 1.3-3.63 1.26-6.08l-.06-3.56a28.55 28.55 0 0 0 5.42-9.44s.93.01 1.92-.05c.32-.02.41.04.35.27-.07.28-1.25 4.84-.17 7.88.74 2.08 2.4 2.75 3.4 2.75 1.15 0 2.26-.87 2.85-2.17l.23.42c1.68 2.65 4.92 2.07 6.56-.18.37-.5.58-.94.58-.94.36 2.2 2.07 2.88 3.05 2.88 1.02 0 2-.42 2.78-2.28.03.82.08 1.49.16 1.7.05.13.34.3.56.37.93.34 1.88.18 2.24.11.24-.05.43-.25.46-.75.07-1.33.03-3.56.43-5.21.67-2.79 1.3-3.87 1.6-4.4.17-.3.36-.35.37-.03.01.64.04 2.52.3 5.05.2 1.86.46 2.96.65 3.3.57 1 1.27 1.05 1.83 1.05.36 0 1.12-.1 1.05-.73-.03-.31.02-2.22.7-4.96.43-1.79 1.15-3.4 1.41-4 .1-.21.15-.04.15 0-.06 1.22-.18 5.25.32 7.46.68 2.98 2.65 3.32 3.34 3.32 1.47 0 2.67-1.12 3.07-4.05.1-.7-.05-1.25-.48-1.25Z" fill="currentColor" fill-rule="evenodd"></path>
+                    </svg>
+                    
+                    <svg aria-label="Instagram" class="instagram-icon-logo" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <nav class="sidebar-menu">
+                <!-- Home -->
+                <label for="panel-home" class="menu-item nav-home">
+                    <svg aria-label="Home" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24" class="icon-outline">
+<path d="m21.762 8.786-7-6.68C13.266.68 10.734.68 9.238 2.106l-7 6.681A4.017 4.017 0 0 0 1 11.68V20c0 1.654 1.346 3 3 3h5.005a1 1 0 0 0 1-1L10 15c0-1.103.897-2 2-2 1.09 0 1.98.877 2 1.962L13.999 22a1 1 0 0 0 1 1H20c1.654 0 3-1.346 3-3v-8.32a4.021 4.021 0 0 0-1.238-2.894ZM21 20a1 1 0 0 1-1 1h-4.001L16 15c0-2.206-1.794-4-4-4s-4 1.794-4 4l.005 6H4a1 1 0 0 1-1-1v-8.32c0-.543.226-1.07.62-1.447l7-6.68c.747-.714 2.013-.714 2.76 0l7 6.68c.394.376.62.904.62 1.448V20Z"></path>                    </svg>
+                    <svg aria-label="Home" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24" class="icon-filled">
+<path d="m21.762 8.786-7-6.68C13.266.68 10.734.68 9.238 2.106l-7 6.681A4.017 4.017 0 0 0 1 11.68V20c0 1.654 1.346 3 3 3h5.005a1 1 0 0 0 1-1L10 15c0-1.103.897-2 2-2 1.09 0 1.98.877 2 1.962L13.999 22a1 1 0 0 0 1 1H20c1.654 0 3-1.346 3-3v-8.32a4.021 4.021 0 0 0-1.238-2.894ZM21 20a1 1 0 0 1-1 1h-4.001L16 15c0-2.206-1.794-4-4-4s-4 1.794-4 4l.005 6H4a1 1 0 0 1-1-1v-8.32c0-.543.226-1.07.62-1.447l7-6.68c.747-.714 2.013-.714 2.76 0l7 6.68c.394.376.62.904.62 1.448V20Z"></path>                    </svg>
+                    <span>Home</span>
+                </label>
+
+                <!-- Reels -->
+                <a href="#" class="menu-item" id="menu-reels">
+                    <svg aria-label="Reels" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M22.935 7.468c-.063-1.36-.307-2.142-.512-2.67a5.341 5.341 0 0 0-1.27-1.95 5.345 5.345 0 0 0-1.95-1.27c-.53-.206-1.311-.45-2.672-.513C15.333 1.012 14.976 1 12 1s-3.333.012-4.532.065c-1.36.063-2.142.307-2.67.512-.77.298-1.371.69-1.95 1.27a5.36 5.36 0 0 0-1.27 1.95c-.206.53-.45 1.311-.513 2.672C1.012 8.667 1 9.024 1 12s.012 3.333.065 4.532c.063 1.36.307 2.142.512 2.67.297.77.69 1.372 1.27 1.95.58.581 1.181.974 1.95 1.27.53.206 1.311.45 2.672.513C8.667 22.988 9.024 23 12 23s3.333-.012 4.532-.065c1.36-.063 2.142-.307 2.67-.512a5.33 5.33 0 0 0 1.95-1.27 5.356 5.356 0 0 0 1.27-1.95c.206-.53.45-1.311.513-2.672.053-1.198.065-1.555.065-4.531s-.012-3.333-.065-4.532Zm-1.998 8.972c-.05 1.07-.228 1.652-.38 2.04-.197.51-.434.874-.82 1.258a3.362 3.362 0 0 1-1.258.82c-.387.151-.97.33-2.038.379-1.162.052-1.51.063-4.441.063s-3.28-.01-4.44-.063c-1.07-.05-1.652-.228-2.04-.38a3.354 3.354 0 0 1-1.258-.82 3.362 3.362 0 0 1-.82-1.258c-.151-.387-.33-.97-.379-2.038C3.011 15.28 3 14.931 3 12s.01-3.28.063-4.44c.05-1.07.228-1.652.38-2.04.197-.51.434-.875.82-1.26a3.372 3.372 0 0 1 1.258-.819c.387-.15.97-.329 2.038-.378C8.72 3.011 9.069 3 12 3s3.28.01 4.44.063c1.07.05 1.652.228 2.04.38.51.197.874.433 1.258.82.385.382.622.747.82 1.258.151.387.33.97.379 2.038C20.989 8.72 21 9.069 21 12s-.01 3.28-.063 4.44Zm-4.584-6.828-5.25-3a2.725 2.725 0 0 0-2.745.01A2.722 2.722 0 0 0 6.988 9v6c0 .992.512 1.88 1.37 2.379.432.25.906.376 1.38.376.468 0 .937-.123 1.365-.367l5.25-3c.868-.496 1.385-1.389 1.385-2.388s-.517-1.892-1.385-2.388Zm-.993 3.04-5.25 3a.74.74 0 0 1-.748-.003.74.74 0 0 1-.374-.649V9a.74.74 0 0 1 .374-.65.737.737 0 0 1 .748-.002l5.25 3c.341.196.378.521.378.652s-.037.456-.378.651Z"></path></svg>
+                    <span>Reels</span>
+                </a>
+
+                <!-- Messages -->
+                <a href="#" class="menu-item" id="menu-messages">
+                    <div class="menu-icon-badge-container">
+                        <svg aria-label="Messages" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><title>Messages</title><path d="M13.973 20.046 21.77 6.928C22.8 5.195 21.55 3 19.535 3H4.466C2.138 3 .984 5.825 2.646 7.456l4.842 4.752 1.723 7.121c.548 2.266 3.571 2.721 4.762.717Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="7.488" x2="15.515" y1="12.208" y2="7.641"></line></svg>
+                    </div>
+                    <span>Messages</span>
+                </a>
+
+                <!-- Search -->
+                <label for="panel-search" class="menu-item nav-search">
+                    <svg aria-label="Search" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><title>Search</title><path d="M19 10.5A8.5 8.5 0 1 1 10.5 2a8.5 8.5 0 0 1 8.5 8.5Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="16.511" x2="22" y1="16.511" y2="22"></line></svg>
+                    <span>Search</span>
+                </label>
+
+                <!-- Notifications -->
+                <label for="panel-notifications" class="menu-item nav-notifications">
+                    <div class="menu-icon-badge-container">
+                        <svg aria-label="Notifications" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24" class="icon-outline">
+                            <path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z"></path>
+                        </svg>
+                        <svg aria-label="Notifications" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24" class="icon-filled">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+                        </svg>
+                    </div>
+                    <span>Notifications</span>
+                </label>
+
+                <!-- Create -->
+                <label for="modal-create" class="menu-item nav-create">
+                    <svg aria-label="New post" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><title>New post</title><path d="M21 11h-8V3a1 1 0 1 0-2 0v8H3a1 1 0 1 0 0 2h8v8a1 1 0 1 0 2 0v-8h8a1 1 0 1 0 0-2Z"></path></svg>
+                    <span>Create</span>
+                </label>
+
+                <!-- Profile -->
+                <a href="#" class="menu-item" id="menu-profile">
+                    <div class="profile-avatar-container">
+                        <img src="https://scontent-bom5-2.cdninstagram.com/v/t51.82787-19/718139060_17929931394311100_6946887596660016425_n.jpg?_nc_cat=108&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=fg5Qi_6SVW8Q7kNvwGa915m&_nc_oc=AdrgVvIOzCTDgvjgLe3wLlVzrP8zLAfOBFcoTOLeRfF-WUVqW9nW9sAuUUbLdFlh-tDbPl3zXrQVTzzl_k8YsA6i&_nc_zt=24&_nc_ht=scontent-bom5-2.cdninstagram.com&_nc_gid=DvszTQyhqh9M3JNpZkjBrw&_nc_ss=7b6a8&oh=00_Af9dX6Qz35TkYR90piJzHC89LAOIkiGOyOzmd8LAWBdZzA&oe=6A2CE08E" alt="Your Profile" class="avatar-img-small">
+                    </div>
+                    <span>Profile</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="menu-item" id="menu-more">
+                    <svg aria-label="More options" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
+                        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="3" x2="21" y1="4" y2="4"></line>
+                        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="3" x2="21" y1="12" y2="12"></line>
+                        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="3" x2="21" y1="20" y2="20"></line>
+                    </svg>
+                    <span>More</span>
+                </a>
+                <a href="#" class="menu-item" id="menu-meta">
+                    <svg aria-label="Also from Meta" fill="currentColor" height="24" viewBox="0 0 24 24" width="24">
+                        <path d="M9.5 11h5c1.379 0 2.5-1.122 2.5-2.5v-5C17 2.122 15.879 1 14.5 1h-5A2.503 2.503 0 0 0 7 3.5v5C7 9.878 8.12 11 9.5 11ZM9 3.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5v-5ZM8.499 13h-5a2.503 2.503 0 0 0-2.5 2.5v5c0 1.378 1.12 2.5 2.5 2.5h5c1.379 0 2.5-1.122 2.5-2.5v-5c0-1.378-1.121-2.5-2.5-2.5Zm.5 7.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5v-5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5Zm11.5-7.5h-5a2.503 2.503 0 0 0-2.5 2.5v5c0 1.378 1.12 2.5 2.5 2.5h5c1.379 0 2.5-1.122 2.5-2.5v-5c0-1.378-1.121-2.5-2.5-2.5Zm.5 7.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5v-5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5Z"></path>
+                    </svg>
+                    <span>Also from Meta</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Search Drawer -->
+        <div class="search-drawer" id="search-drawer">
+            <div class="drawer-header">
+                <h2>Search</h2>
+                <div class="search-input-wrapper">
+                    <input type="text" placeholder="Search" id="drawer-search-input">
+                    <button class="clear-search-btn" id="clear-search-btn">&times;</button>
+                </div>
+            </div>
+            <div class="drawer-content">
+                <div class="recent-title">
+                    <h4>Recent</h4>
+                    <button class="clear-all-btn">Clear all</button>
+                </div>
+                <div class="recent-searches-list">
+                    <a href="#" class="search-result-item">
+                        <div class="search-item-info">
+                            <img src="https://i.pinimg.com/736x/ab/f1/fa/abf1facda2a42c1dc33b6e7ed2527021.jpg" class="user-avatar-round size-medium" alt="">
+                            <div class="search-item-meta">
+                                <span class="username">coffee_and_code</span>
+                                <span class="subtitle">Followed by chef_mario + 1 more</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="search-result-item">
+                        <div class="search-item-info">
+                            <img src="https://i.pinimg.com/736x/3e/9e/95/3e9e95e845d70d820a89db44b3d19d09.jpg" class="user-avatar-round size-medium" alt="">
+                            <div class="search-item-meta">
+                                <span class="username">travel_diaries</span>
+                                <span class="subtitle">Follows you</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications Drawer -->
+        <div class="notifications-drawer" id="notifications-drawer">
+            <div class="drawer-header">
+                <h2>Notifications</h2>
+            </div>
+            <div class="drawer-content">
+                <div class="notification-section">
+                    <h4>This Week</h4>
+                    <div class="notification-item">
+                        <img src="https://i.pinimg.com/736x/ab/f1/fa/abf1facda2a42c1dc33b6e7ed2527021.jpg" class="notif-avatar" alt="Avatar">
+                        <div class="notif-text">
+                            <span class="username">coffee_and_code</span> liked your post. <span class="notif-time">2d</span>
+                        </div>
+                        <img src="https://i.pinimg.com/736x/09/a6/ba/09a6ba01619c0eead894bd1534441d4a.jpg" class="notif-post-preview" alt="Post">
+                    </div>
+                    <div class="notification-item">
+                        <img src="https://i.pinimg.com/736x/3e/9e/95/3e9e95e845d70d820a89db44b3d19d09.jpg" class="notif-avatar" alt="Avatar">
+                        <div class="notif-text">
+                            <span class="username">travel_explorer</span> started following you. <span class="notif-time">4d</span>
+                        </div>
+                        <input type="checkbox" id="follow-notif-travel" class="follow-toggle">
+                        <label for="follow-notif-travel" class="notif-action-btn follow-btn">
+                            <span class="follow-label-on">Follow</span>
+                            <span class="follow-label-off">Following</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="notification-section">
+                    <h4>Earlier</h4>
+                    <div class="notification-item">
+                        <img src="https://i.pinimg.com/736x/6b/e3/d1/6be3d169bfeeac8e61128c68e4dc3d12.jpg" class="notif-avatar" alt="Avatar">
+                        <div class="notif-text">
+                            <span class="username">urban_art</span> commented: "Stunning grading! 🔥" <span class="notif-time">1w</span>
+                        </div>
+                        <img src="https://i.pinimg.com/736x/09/a6/ba/09a6ba01619c0eead894bd1534441d4a.jpg" class="notif-post-preview" alt="Post">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-container">
+            <div class="feed-layout-inner">
+                <!-- Feed -->
+                <section class="feed-column">
+                    <!-- Stories -->
+                    <div class="stories-wrapper">
+                        <button class="stories-scroll-btn prev-btn" id="stories-scroll-prev" aria-label="Scroll left">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        </button>
+                        <div class="stories-container" id="stories-container">
+                            
+                            <a href="#story-0" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://scontent-bom5-2.cdninstagram.com/v/t51.82787-19/718139060_17929931394311100_6946887596660016425_n.jpg?_nc_cat=108&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=fg5Qi_6SVW8Q7kNvwGa915m&_nc_oc=AdrgVvIOzCTDgvjgLe3wLlVzrP8zLAfOBFcoTOLeRfF-WUVqW9nW9sAuUUbLdFlh-tDbPl3zXrQVTzzl_k8YsA6i&_nc_zt=24&_nc_ht=scontent-bom5-2.cdninstagram.com&_nc_gid=DvszTQyhqh9M3JNpZkjBrw&_nc_ss=7b6a8&oh=00_Af9dX6Qz35TkYR90piJzHC89LAOIkiGOyOzmd8LAWBdZzA&oe=6A2CE08E" alt="Story user">
+                                </div>
+                                <span class="story-username">Your Story</span>
+                            </a>
+                            <a href="#story-1" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://i.pinimg.com/736x/ab/f1/fa/abf1facda2a42c1dc33b6e7ed2527021.jpg" alt="Story user">
+                                </div>
+                                <span class="story-username">De Niro</span>
+                            </a>
+                            <a href="#story-2" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://i.pinimg.com/736x/3e/9e/95/3e9e95e845d70d820a89db44b3d19d09.jpg" alt="Story user">
+                                </div>
+                                <span class="story-username">travis</span>
+                            </a>
+                            <a href="#story-3" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://i.pinimg.com/736x/6b/e3/d1/6be3d169bfeeac8e61128c68e4dc3d12.jpg" alt="Story user">
+                                </div>
+                                <span class="story-username">Patrick</span>
+                            </a>
+                            <a href="#story-4" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://i.pinimg.com/736x/58/21/89/582189cb48a75bb9150706b6f98aaa4a.jpg" alt="Story user">
+                                </div>
+                                <span class="story-username">Val Kilmer</span>
+                            </a>
+                            <a href="#story-5" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://i.pinimg.com/736x/41/aa/9f/41aa9ff309b263dafdcb7c9b773c1db4.jpg" alt="Story user">
+                                </div>
+                                <span class="story-username">forces</span>
+                            </a>
+                            <a href="#story-6" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://i.pinimg.com/736x/43/47/96/434796cb756b478809401fef78a02f64.jpg" alt="Story user">
+                                </div>
+                                <span class="story-username">uniform</span>
+                            </a>
+                            <a href="#story-7" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop" alt="Story user">
+                                </div>
+                                <span class="story-username">sunset_seeker</span>
+                            </a>
+                            <a href="#story-8" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=256&auto=format&fit=crop" alt="Story user">
+                                </div>
+                                <span class="story-username">nature_lover</span>
+                            </a>
+                            <a href="#story-9" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=256&auto=format&fit=crop" alt="Story user">
+                                </div>
+                                <span class="story-username">wildlife_pic</span>
+                            </a>
+                            <a href="#story-10" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=256&auto=format&fit=crop" alt="Story user">
+                                </div>
+                                <span class="story-username">pixel_arch</span>
+                            </a>
+                            <a href="#story-11" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=256&auto=format&fit=crop" alt="Story user">
+                                </div>
+                                <span class="story-username">music_vibes</span>
+                            </a>
+                            <a href="#story-12" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=256&auto=format&fit=crop" alt="Story user">
+                                </div>
+                                <span class="story-username">bookworm</span>
+                            </a>
+                            <a href="#story-13" class="story">
+                                <div class="story-ring unread">
+                                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=256&auto=format&fit=crop" alt="Story user">
+                                </div>
+                                <span class="story-username">fashion_trend</span>
+                            </a>
+                        </div>
+                        <button class="stories-scroll-btn next-btn" id="stories-scroll-next" aria-label="Scroll right">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Posts -->
+                    <div class="post-feed" id="post-feed">
+                        <!-- Post 1 -->
+                        <article class="post-card" data-post-id="1">
+                            <input type="checkbox" id="like-p1" class="like-toggle state-input">
+                            <input type="checkbox" id="save-p1" class="save-toggle state-input">
+                            <input type="checkbox" id="comments-p1" class="comments-toggle state-input">
+                            <header class="post-card-header">
+                                <div class="post-user-info">
+                                    <img src="https://scontent-bom5-2.cdninstagram.com/v/t51.82787-19/718139060_17929931394311100_6946887596660016425_n.jpg?_nc_cat=108&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=fg5Qi_6SVW8Q7kNvwGa915m&_nc_oc=AdrgVvIOzCTDgvjgLe3wLlVzrP8zLAfOBFcoTOLeRfF-WUVqW9nW9sAuUUbLdFlh-tDbPl3zXrQVTzzl_k8YsA6i&_nc_zt=24&_nc_ht=scontent-bom5-2.cdninstagram.com&_nc_gid=DvszTQyhqh9M3JNpZkjBrw&_nc_ss=7b6a8&oh=00_Af9dX6Qz35TkYR90piJzHC89LAOIkiGOyOzmd8LAWBdZzA&oe=6A2CE08E" alt="User Avatar" class="user-avatar-round">
+                                    <div class="user-details">
+                                        <div class="username-row">
+                                            <span class="username">harshitcodes</span>
+                                            <svg class="verified-badge" aria-label="Verified" fill="#0095f6" height="12" viewBox="0 0 40 40" width="12">
+                                                <path d="M19.998 3.132 18 1.801a4.014 4.014 0 0 0-4.823.497l-1.921 1.92a4.004 4.004 0 0 1-3.626 1.134L5.3 4.965a4.015 4.015 0 0 0-4.148 2.766L.484 9.873a4.005 4.005 0 0 1-1.666 3.418L-.002 14.8c-.808.808-1.077 2.008-.68 3.132l.707 2.14a4.005 4.005 0 0 1-.223 3.801l-1.28 1.92a4.015 4.015 0 0 0 .497 4.823l1.92 1.921c.84.84 1.258 2.016 1.134 3.626l-.387 2.329a4.015 4.015 0 0 0 2.766 4.148l2.142.668a4.005 4.005 0 0 1 3.418 1.666l1.509 1.821c.808.808 2.008 1.077 3.132.68l2.14-.707a4.005 4.005 0 0 1 3.801.223l1.92 1.28a4.015 4.015 0 0 0 4.823-.497l1.921-1.92a4.004 4.004 0 0 1 3.626-1.134l2.329.387a4.015 4.015 0 0 0 4.148-2.766l.668-2.142a4.005 4.005 0 0 1 1.666-3.418l1.82-1.509c.809-.808 1.078-2.008.682-3.132l-.707-2.14a4.005 4.005 0 0 1 .223-3.801l1.28-1.92a4.015 4.015 0 0 0-.497-4.823l-1.92-1.921c-.84-.84-1.258-2.016-1.134-3.626l.387-2.329a4.015 4.015 0 0 0-2.766-4.148l-2.142-.668a4.005 4.005 0 0 1-3.418-1.666L25.196.485c-.808-.808-2.008-1.077-3.132-.68l-2.066.687Z"></path>
+                                                <polygon points="9.5 20 16.5 27 30.5 11 27.5 8 16.5 21 12.5 17 9.5 20"></polygon>
+                                            </svg>
+                                            <span class="bullet">•</span>
+                                            <span class="post-time">2h</span>
+                                        </div>
+                                        <span class="location">Gandhinagar, Gujarat</span>
+                                    </div>
+                                </div>
+                                <button class="more-options-btn">
+                                    <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+                                </button>
+                            </header>
+
+                            <label for="like-p1" class="post-image-area" aria-label="Like post">
+                                <img src="https://scontent-bom5-2.cdninstagram.com/v/t51.82787-19/718139060_17929931394311100_6946887596660016425_n.jpg?_nc_cat=108&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=fg5Qi_6SVW8Q7kNvwGa915m&_nc_oc=AdrgVvIOzCTDgvjgLe3wLlVzrP8zLAfOBFcoTOLeRfF-WUVqW9nW9sAuUUbLdFlh-tDbPl3zXrQVTzzl_k8YsA6i&_nc_zt=24&_nc_ht=scontent-bom5-2.cdninstagram.com&_nc_gid=DvszTQyhqh9M3JNpZkjBrw&_nc_ss=7b6a8&oh=00_Af9dX6Qz35TkYR90piJzHC89LAOIkiGOyOzmd8LAWBdZzA&oe=6A2CE08E" alt="Post image" class="post-main-img">
+                                <div class="double-tap-heart">
+                                    <svg fill="#fff" viewBox="0 0 24 24" width="100" height="100"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                                </div>
+                            </label>
+
+                            <div class="post-card-actions">
+                                <div class="action-left-buttons">
+                                    <label for="like-p1" class="action-btn btn-like" aria-label="Like">
+                                        
+                                        <svg aria-label="Like" class="like-outline" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z"></path></svg>
+                                        
+                                        <svg aria-hidden="true" class="like-filled" fill="#ff3040" height="24" viewBox="0 0 24 24" width="24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                                    </label>
+                                    <label for="comment-focus-p1" class="action-btn btn-comment" aria-label="Comment">
+                                        <svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+                                    </label>
+                                    <span class="action-btn btn-share" aria-label="Share">
+                                        <svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M13.973 20.046 21.77 6.928C22.8 5.195 21.55 3 19.535 3H4.466C2.138 3 .984 5.825 2.646 7.456l4.842 4.752 1.723 7.121c.548 2.266 3.571 2.721 4.762.717Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="7.488" x2="15.515" y1="12.208" y2="7.641"></line></svg>
+                                    </span>
+                                </div>
+                                <label for="save-p1" class="action-btn btn-save" aria-label="Save">
+                                    <svg aria-hidden="true" class="save-outline" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M20 22a.999.999 0 0 1-.587-.19L12 17.41l-7.413 4.4a1 1 0 0 1-1.503-.925V4.5A2.5 2.5 0 0 1 5.59 2h12.82A2.5 2.5 0 0 1 21 4.5v16.385a1 1 0 0 1-1 1.015z" fill="none" stroke="currentColor" stroke-width="2"></path></svg>
+                                    <svg aria-hidden="true" class="save-filled" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M20 22a.999.999 0 0 1-.587-.19L12 17.41l-7.413 4.4a1 1 0 0 1-1.503-.925V4.5A2.5 2.5 0 0 1 5.59 2h12.82A2.5 2.5 0 0 1 21 4.5v16.385a1 1 0 0 1-1 1.015z"></path></svg>
+                                </label>
+                            </div>
+
+                            <section class="post-likes-section">
+                                <span class="likes-count">1,248</span> likes
+                            </section>
+
+                            <div class="post-caption-comments">
+                                <div class="caption-line">
+                                    <span class="username font-weight-bold">harshitcodes</span>
+                                    <span class="caption-text">This is me harshit a computer science student</span>
+                                </div>
+                                <label for="comments-p1" class="view-comments-link">
+                                    View all <span class="comment-count">2</span> comments
+                                </label>
+                                <div class="comments-list">
+                                    <div class="comment-item">
+                                        <span class="username font-weight-bold">Rekha</span>
+                                        <span class="comment-text">Hey There! 🚀</span>
+                                    </div>
+                                    <div class="comment-item">
+                                        <span class="username font-weight-bold">tech_pioneer</span>
+                                        <span class="comment-text">Positive all day long!</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <footer class="post-comment-input-bar">
+                                <svg class="emoji-btn" aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M12 2A10 10 0 1 0 22 12 10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm3.5-9a1.5 1.5 0 1 0-1.5-1.5 1.5 1.5 0 0 0 1.5 1.5zm-7 0A1.5 1.5 0 1 0 7 9.5 1.5 1.5 0 0 0 8.5 11zm3.5 4.5a3.5 3.5 0 0 1-3.06-1.8 1 1 0 1 1 1.74-1 1.5 1.5 0 0 0 2.64 0 1 1 0 1 1 1.74 1A3.5 3.5 0 0 1 12 15.5z"></path></svg>
+                                <div class="comment-form">
+                                    <input type="text" id="comment-focus-p1" placeholder="Add a comment..." class="comment-input-field" aria-label="Add a comment">
+                                    <span class="comment-submit-btn">Post</span>
+                                </div>
+                            </footer>
+                        </article>
+
+                        <!-- Post 2 -->
+                        <article class="post-card" data-post-id="2">
+                            <input type="checkbox" id="like-p2" class="like-toggle state-input">
+                            <input type="checkbox" id="save-p2" class="save-toggle state-input">
+                            <input type="checkbox" id="comments-p2" class="comments-toggle state-input">
+                            <header class="post-card-header">
+                                <div class="post-user-info">
+                                    <img src="https://i.pinimg.com/736x/3e/9e/95/3e9e95e845d70d820a89db44b3d19d09.jpg" alt="User Avatar" class="user-avatar-round">
+                                    <div class="user-details">
+                                        <div class="username-row">
+                                            <span class="username">Robert De Niro</span>
+                                            <span class="bullet">•</span>
+                                            <span class="post-time">1d</span>
+                                        </div>
+                                        <span class="location">New York Downtown</span>
+                                    </div>
+                                </div>
+                                <button class="more-options-btn">
+                                    <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+                                </button>
+                            </header>
+
+                            <label for="like-p2" class="post-image-area" aria-label="Like post">
+                                <img src="https://i.pinimg.com/1200x/68/db/bd/68dbbdfef3c3e95db66cb70579b609dc.jpg" alt="Post image" class="post-main-img">
+                                <div class="double-tap-heart">
+                                    <svg fill="#fff" viewBox="0 0 24 24" width="100" height="100"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                                </div>
+                            </label>
+
+                            <div class="post-card-actions">
+                                <div class="action-left-buttons">
+                                    <label for="like-p2" class="action-btn btn-like" aria-label="Like">
+                                        <svg aria-label="Like" class="like-outline" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z"></path></svg>
+                                        <svg aria-hidden="true" class="like-filled" fill="#ff3040" height="24" viewBox="0 0 24 24" width="24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                                    </label>
+                                    <label for="comment-focus-p2" class="action-btn btn-comment" aria-label="Comment">
+                                        <svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+                                    </label>
+                                    <span class="action-btn btn-share" aria-label="Share">
+                                        <svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M13.973 20.046 21.77 6.928C22.8 5.195 21.55 3 19.535 3H4.466C2.138 3 .984 5.825 2.646 7.456l4.842 4.752 1.723 7.121c.548 2.266 3.571 2.721 4.762.717Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="7.488" x2="15.515" y1="12.208" y2="7.641"></line></svg>
+                                    </span>
+                                </div>
+                                <label for="save-p2" class="action-btn btn-save" aria-label="Save">
+                                    <svg aria-hidden="true" class="save-outline" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M20 22a.999.999 0 0 1-.587-.19L12 17.41l-7.413 4.4a1 1 0 0 1-1.503-.925V4.5A2.5 2.5 0 0 1 5.59 2h12.82A2.5 2.5 0 0 1 21 4.5v16.385a1 1 0 0 1-1 1.015z" fill="none" stroke="currentColor" stroke-width="2"></path></svg>
+                                    <svg aria-hidden="true" class="save-filled" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M20 22a.999.999 0 0 1-.587-.19L12 17.41l-7.413 4.4a1 1 0 0 1-1.503-.925V4.5A2.5 2.5 0 0 1 5.59 2h12.82A2.5 2.5 0 0 1 21 4.5v16.385a1 1 0 0 1-1 1.015z"></path></svg>
+                                </label>
+                            </div>
+
+                            <section class="post-likes-section">
+                                <span class="likes-count">3,852</span> likes
+                            </section>
+
+                            <div class="post-caption-comments">
+                                <div class="caption-line">
+                                    <span class="username font-weight-bold">Robert De Niro</span>
+                                    <span class="caption-text">Don't let yourself get attached to anything you are not willing to walk out on in 30 seconds flat if you feel the heat around the corner.</span>
+                                </div>
+                                <label for="comments-p2" class="view-comments-link">
+                                    View all <span class="comment-count">1</span> comments
+                                </label>
+                                <div class="comments-list">
+                                    <div class="comment-item">
+                                        <span class="username font-weight-bold">wanderer_amit</span>
+                                        <span class="comment-text">Wow, that gun is pure perfection!</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <footer class="post-comment-input-bar">
+                                <svg class="emoji-btn" aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M12 2A10 10 0 1 0 22 12 10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm3.5-9a1.5 1.5 0 1 0-1.5-1.5 1.5 1.5 0 0 0 1.5 1.5zm-7 0A1.5 1.5 0 1 0 7 9.5 1.5 1.5 0 0 0 8.5 11zm3.5 4.5a3.5 3.5 0 0 1-3.06-1.8 1 1 0 1 1 1.74-1 1.5 1.5 0 0 0 2.64 0 1 1 0 1 1 1.74 1A3.5 3.5 0 0 1 12 15.5z"></path></svg>
+                                <div class="comment-form">
+                                    <input type="text" id="comment-focus-p2" placeholder="Add a comment..." class="comment-input-field" aria-label="Add a comment">
+                                    <span class="comment-submit-btn">Post</span>
+                                </div>
+                            </footer>
+                        </article>
+
+                        <!-- Post 3 -->
+                        <article class="post-card" data-post-id="3">
+                            <input type="checkbox" id="like-p3" class="like-toggle state-input">
+                            <input type="checkbox" id="save-p3" class="save-toggle state-input">
+                            <input type="checkbox" id="comments-p3" class="comments-toggle state-input">
+                            <header class="post-card-header">
+                                <div class="post-user-info">
+                                    <img src="https://i.pinimg.com/736x/6b/e3/d1/6be3d169bfeeac8e61128c68e4dc3d12.jpg" alt="User Avatar" class="user-avatar-round">
+                                    <div class="user-details">
+                                        <div class="username-row">
+                                            <span class="username">Val Kilmer</span>
+                                            <span class="bullet">•</span>
+                                            <span class="post-time">3d</span>
+                                        </div>
+                                        <span class="location">New York City</span>
+                                    </div>
+                                </div>
+                                <button class="more-options-btn" type="button" aria-label="More options">
+                                    <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+                                </button>
+                            </header>
+
+                            <label for="like-p3" class="post-image-area" aria-label="Like post">
+                                <img src="https://i.pinimg.com/736x/58/21/89/582189cb48a75bb9150706b6f98aaa4a.jpg" alt="Post image" class="post-main-img">
+                                <div class="double-tap-heart">
+                                    <svg fill="#fff" viewBox="0 0 24 24" width="100" height="100"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                                </div>
+                            </label>
+
+                            <div class="post-card-actions">
+                                <div class="action-left-buttons">
+                                    <label for="like-p3" class="action-btn btn-like" aria-label="Like">
+                                        <svg aria-hidden="true" class="like-outline" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z"></path></svg>
+                                        <svg aria-hidden="true" class="like-filled" fill="#ff3040" height="24" viewBox="0 0 24 24" width="24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                                    </label>
+                                    <label for="comment-focus-p3" class="action-btn btn-comment" aria-label="Comment">
+                                        <svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+                                    </label>
+                                    <span class="action-btn btn-share" aria-label="Share">
+                                        <svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M13.973 20.046 21.77 6.928C22.8 5.195 21.55 3 19.535 3H4.466C2.138 3 .984 5.825 2.646 7.456l4.842 4.752 1.723 7.121c.548 2.266 3.571 2.721 4.762.717Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="7.488" x2="15.515" y1="12.208" y2="7.641"></line></svg>
+                                    </span>
+                                </div>
+                                <label for="save-p3" class="action-btn btn-save" aria-label="Save">
+                                    <svg aria-hidden="true" class="save-outline" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M20 22a.999.999 0 0 1-.587-.19L12 17.41l-7.413 4.4a1 1 0 0 1-1.503-.925V4.5A2.5 2.5 0 0 1 5.59 2h12.82A2.5 2.5 0 0 1 21 4.5v16.385a1 1 0 0 1-1 1.015z" fill="none" stroke="currentColor" stroke-width="2"></path></svg>
+                                    <svg aria-hidden="true" class="save-filled" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M20 22a.999.999 0 0 1-.587-.19L12 17.41l-7.413 4.4a1 1 0 0 1-1.503-.925V4.5A2.5 2.5 0 0 1 5.59 2h12.82A2.5 2.5 0 0 1 21 4.5v16.385a1 1 0 0 1-1 1.015z"></path></svg>
+                                </label>
+                            </div>
+
+                            <section class="post-likes-section">
+                                <span class="likes-count">892</span> likes
+                            </section>
+
+                            <div class="post-caption-comments">
+                                <div class="caption-line">
+                                    <span class="username font-weight-bold">Val Kilmer</span>
+                                    <span class="caption-text">If it's between you and some poor bastard whose wife you're gonna turn into a widow, brother, you are going down.</span>
+                                </div>
+                                <label for="comments-p3" class="view-comments-link">
+                                    View all <span class="comment-count">1</span> comments
+                                </label>
+                                <div class="comments-list">
+                                    <div class="comment-item">
+                                        <span class="username font-weight-bold">Robert De Niro</span>
+                                        <span class="comment-text">This is incredible! the M-16 Rifle! itz amazing!</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <footer class="post-comment-input-bar">
+                                <svg class="emoji-btn" aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M12 2A10 10 0 1 0 22 12 10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm3.5-9a1.5 1.5 0 1 0-1.5-1.5 1.5 1.5 0 0 0 1.5 1.5zm-7 0A1.5 1.5 0 1 0 7 9.5 1.5 1.5 0 0 0 8.5 11zm3.5 4.5a3.5 3.5 0 0 1-3.06-1.8 1 1 0 1 1 1.74-1 1.5 1.5 0 0 0 2.64 0 1 1 0 1 1 1.74 1A3.5 3.5 0 0 1 12 15.5z"></path></svg>
+                                <div class="comment-form">
+                                    <input type="text" id="comment-focus-p3" placeholder="Add a comment..." class="comment-input-field" aria-label="Add a comment">
+                                    <span class="comment-submit-btn">Post</span>
+                                </div>
+                            </footer>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Suggestions -->
+                <section class="suggestions-column">
+                    <!-- User Profile -->
+                    <div class="user-profile-header">
+                        <img src="https://scontent-bom5-2.cdninstagram.com/v/t51.82787-19/718139060_17929931394311100_6946887596660016425_n.jpg?_nc_cat=108&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=fg5Qi_6SVW8Q7kNvwGa915m&_nc_oc=AdrgVvIOzCTDgvjgLe3wLlVzrP8zLAfOBFcoTOLeRfF-WUVqW9nW9sAuUUbLdFlh-tDbPl3zXrQVTzzl_k8YsA6i&_nc_zt=24&_nc_ht=scontent-bom5-2.cdninstagram.com&_nc_gid=DvszTQyhqh9M3JNpZkjBrw&_nc_ss=7b6a8&oh=00_Af9dX6Qz35TkYR90piJzHC89LAOIkiGOyOzmd8LAWBdZzA&oe=6A2CE08E" alt="harshitcodes avatar" class="user-avatar-round size-large">
+                        <div class="user-meta">
+                            <span class="username font-weight-bold">harshitcodes</span>
+                            <span class="full-name text-grey">Harshit Singh</span>
+                        </div>
+                        <button class="switch-btn">Switch</button>
+                    </div>
+
+                    <!-- Title -->
+                    <div class="suggestions-header">
+                        <span class="text-grey font-weight-bold">Suggested for you</span>
+                        <button class="see-all-btn">See All</button>
+                    </div>
+
+                    <!-- Suggestions List -->
+                    <div class="suggestions-list">
+                        <div class="suggestion-item">
+                            <img src="https://i.pinimg.com/736x/58/21/89/582189cb48a75bb9150706b6f98aaa4a.jpg" alt="Avatar" class="user-avatar-round size-medium">
+                            <div class="user-meta">
+                                <span class="username font-weight-bold">Val Kilmer</span>
+                                <span class="relation text-grey">Followed by coffee_and_code + 2 more</span>
+                            </div>
+                            <input type="checkbox" id="follow-chef" class="follow-toggle state-input">
+                            <label for="follow-chef" class="follow-action-btn"><span class="follow-label-on">Follow</span><span class="follow-label-off">Following</span></label>
+                        </div>
+                        <div class="suggestion-item">
+                            <img src="https://i.pinimg.com/736x/6b/e3/d1/6be3d169bfeeac8e61128c68e4dc3d12.jpg" alt="Avatar" class="user-avatar-round size-medium">
+                            <div class="user-meta">
+                                <span class="username font-weight-bold">Patrick</span>
+                                <span class="relation text-grey">Followed by travel_diaries</span>
+                            </div>
+                            <input type="checkbox" id="follow-urban" class="follow-toggle state-input">
+                            <label for="follow-urban" class="follow-action-btn"><span class="follow-label-on">Follow</span><span class="follow-label-off">Following</span></label>
+                        </div>
+                        <div class="suggestion-item">
+                            <img src="https://i.pinimg.com/736x/41/aa/9f/41aa9ff309b263dafdcb7c9b773c1db4.jpg" alt="Avatar" class="user-avatar-round size-medium">
+                            <div class="user-meta">
+                                <span class="username font-weight-bold">forces</span>
+                                <span class="relation text-grey">Popular near you</span>
+                            </div>
+                            <input type="checkbox" id="follow-fitness" class="follow-toggle state-input">
+                            <label for="follow-fitness" class="follow-action-btn"><span class="follow-label-on">Follow</span><span class="follow-label-off">Following</span></label>
+                        </div>
+                        <div class="suggestion-item">
+                            <img src="https://i.pinimg.com/736x/43/47/96/434796cb756b478809401fef78a02f64.jpg" alt="Avatar" class="user-avatar-round size-medium">
+                            <div class="user-meta">
+                                <span class="username font-weight-bold">uniform</span>
+                                <span class="relation text-grey">New to Instagram</span>
+                            </div>
+                            <input type="checkbox" id="follow-artistic" class="follow-toggle state-input">
+                            <label for="follow-artistic" class="follow-action-btn"><span class="follow-label-on">Follow</span><span class="follow-label-off">Following</span></label>
+                        </div>
+                        <div class="suggestion-item">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=64&auto=format&fit=crop" alt="Avatar" class="user-avatar-round size-medium">
+                            <div class="user-meta">
+                                <span class="username font-weight-bold">sunset_seeker</span>
+                                <span class="relation text-grey">Follows you</span>
+                            </div>
+                            <input type="checkbox" id="follow-sunset" class="follow-toggle state-input">
+                            <label for="follow-sunset" class="follow-action-btn"><span class="follow-label-on">Follow</span><span class="follow-label-off">Following</span></label>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <footer class="suggestions-footer text-grey">
+                        <nav class="footer-links">
+                            <a href="#">About</a> • <a href="#">Help</a> • <a href="#">Press</a> • <a href="#">API</a> • <a href="#">Jobs</a> • <a href="#">Privacy</a> • <a href="#">Terms</a> • <a href="#">Locations</a> • <a href="#">Language</a> • <a href="#">Meta Verified</a>
+                        </nav>
+                        <span class="copyright">© 2026 INSTAGRAM CLONE BY HARSHIT</span>
+                    </footer>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Nav -->
+    <nav class="mobile-nav" aria-label="Primary navigation">
+        <label for="panel-home" class="mobile-nav-item nav-home" aria-label="Home">
+            <svg aria-hidden="true" class="icon-outline" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M9.005 22h-3a3 3 0 0 1-3-3V11.68a2 2 0 0 1 .62-1.42l6-5.68a3 3 0 0 1 4.14 0l6 5.68a2 2 0 0 1 .62 1.42V19a3 3 0 0 1-3 3h-3a1 1 0 0 1-1-1v-5a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v5a1 1 0 0 1-1 1zm-4-10.42V19a1 1 0 0 0 1 1h2v-4a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3v4h2a1 1 0 0 0 1-1v-7.42l-6-5.68a1 1 0 0 0-1.38 0z"></path></svg>
+            <svg aria-hidden="true" class="icon-filled" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M21.762 8.786l-7-6.68a3.994 3.994 0 0 0-5.524 0l-7 6.681A4.017 4.017 0 0 0 1 11.68V19c0 2.206 1.794 4 4 4h3.005a1 1 0 0 0 1-1v-7.003a2.997 2.997 0 0 1 5.994 0V22a1 1 0 0 0 1 1H19c2.206 0 4-1.794 4-4v-7.32a4.02 4.02 0 0 0-1.238-2.894Z"></path></svg>
+        </label>
+        <label for="panel-search" class="mobile-nav-item nav-search" aria-label="Search">
+            <svg aria-hidden="true" class="icon-outline" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M19 10.5a8.5 8.5 0 1 1-8.5-8.5 8.5 8.5 0 0 1 8.5 8.5zm1.96 8.44-3.62-3.62a11.02 11.02 0 1 0-1.42 1.42l3.62 3.62a1 1 0 0 0 1.42-1.42z"></path></svg>
+            <svg aria-hidden="true" class="icon-filled" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M10.5 2a8.5 8.5 0 1 0 8.5 8.5A8.51 8.51 0 0 0 10.5 2zm10.96 18.44-3.62-3.62a11.02 11.02 0 1 1 1.42-1.42l3.62 3.62a1 1 0 1 1-1.42 1.42z"></path></svg>
+        </label>
+        <label for="modal-create" class="mobile-nav-item nav-create" aria-label="Create">
+            <svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h7m5 0h-6m3-3v6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="none"></path></svg>
+        </label>
+        <a href="#" class="mobile-nav-item nav-reels" aria-label="Reels">
+            <svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24"><rect fill="none" height="18" rx="3" stroke="currentColor" stroke-width="2" width="18" x="3" y="3"></rect><polygon fill="currentColor" points="12 9 17 12 12 15 12 9"></polygon></svg>
+        </a>
+        <a href="#" class="mobile-nav-item" id="mobile-profile" aria-label="Profile">
+            <img src="https://i.pinimg.com/1200x/40/9f/d9/409fd9d7b3187c4138b25f57167772e1.jpg" alt="" class="mobile-nav-avatar">
+        </a>
+    </nav>
+
+    <input type="checkbox" id="modal-create" class="state-input">
+    <!-- Create Post Modal -->
+    <div class="modal-overlay create-post-modal" id="create-post-modal">
+        <label for="modal-create" class="modal-scrim" aria-label="Close"></label>
+        <div class="create-post-container">
+            <header class="modal-header">
+                <label for="modal-create" class="modal-close-btn">&larr;</label>
+                <h3 id="create-post-title">Create new post</h3>
+                <span class="modal-share-btn modal-share-demo">Share</span>
+            </header>
+            <div class="modal-body">
+                <div class="image-upload-pane">
+                    <div class="upload-placeholder">
+                        <svg aria-hidden="true" fill="currentColor" height="77" viewBox="0 0 97.6 77.3" width="96"><path d="M16.3 24h.3c.3-.2.6-.4.9-.7l15-15c.6-.6.6-1.5 0-2.1l-.8-.8c-.6-.6-1.5-.6-2.1 0L17.6 17.3c-.3.3-.6.4-.9.4-.3 0-.6-.1-.9-.4L8.3 9.7c-.6-.6-1.5-.6-2.1 0l-.8.8c-.6.6-.6 1.5 0 2.1l10.2 10.2c.3.3.6.5.9.7.3.2.6.4.9.5zm70.2-10H50c-1.7 0-3 1.3-3 3v21c0 1.7 1.3 3 3 3h36.5c1.7 0 3-1.3 3-3v-21c0-1.7-1.3-3-3-3zm-27.5 15c0-1.7 1.3-3 3-3s3 1.3 3 3-1.3 3-3 3-3-1.3-3-3zm18 10h-25c-.6 0-1-.4-1-1v-2.3c0-.6.4-1 1-1h2.5c.3 0 .6-.1.8-.3l3.6-3.6c.6-.6 1.5-.6 2.1 0l2.3 2.3c.2.2.5.3.8.3H85c.6 0 1 .4 1 1v4.6c0 .6-.4 1-1 1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                        <p>Add a photo from a link (demo layout)</p>
+                        <input type="url" class="modal-url-input" placeholder="https://example.com/image.jpg">
+                    </div>
+                </div>
+                <div class="caption-pane">
+                    <div class="user-row">
+                        <img src="https://i.pinimg.com/1200x/40/9f/d9/409fd9d7b3187c4138b25f57167772e1.jpg" alt="Avatar" class="user-avatar-round size-small">
+                        <span class="username font-weight-bold">harshitcodes</span>
+                    </div>
+                    <textarea placeholder="Write a caption..." class="caption-textarea"></textarea>
+                    <div class="meta-inputs">
+                        <input type="text" placeholder="Add location" class="meta-text-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Story Viewer Modal -->
+    <div id="story-0" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <div class="story-progress-bar-wrapper"><div class="story-progress-segment"><div class="story-progress-fill" style="width:100%"></div></div></div>
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://scontent-bom5-2.cdninstagram.com/v/t51.82787-19/718139060_17929931394311100_6946887596660016425_n.jpg?_nc_cat=108&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=fg5Qi_6SVW8Q7kNvwGa915m&_nc_oc=AdrgVvIOzCTDgvjgLe3wLlVzrP8zLAfOBFcoTOLeRfF-WUVqW9nW9sAuUUbLdFlh-tDbPl3zXrQVTzzl_k8YsA6i&_nc_zt=24&_nc_ht=scontent-bom5-2.cdninstagram.com&_nc_gid=DvszTQyhqh9M3JNpZkjBrw&_nc_ss=7b6a8&oh=00_Af9dX6Qz35TkYR90piJzHC89LAOIkiGOyOzmd8LAWBdZzA&oe=6A2CE08E" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">harshitcodes</span>
+                    <span class="story-time text-grey">2h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/736x/5b/b9/29/5bb929d50eb29b131f40d391567a396a.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <div id="story-1" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://i.pinimg.com/736x/ab/f1/fa/abf1facda2a42c1dc33b6e7ed2527021.jpg" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">coffee_and_code</span>
+                    <span class="story-time text-grey">4h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/736x/bc/ea/3b/bcea3b4207f4ba3cb8bfb6bdca88a27d.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <div id="story-2" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://i.pinimg.com/736x/3e/9e/95/3e9e95e845d70d820a89db44b3d19d09.jpg" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">travel_diaries</span>
+                    <span class="story-time text-grey">6h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/736x/19/ca/ae/19caae8568ee61b1aeb85f3f905fdd82.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <div id="story-3" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://i.pinimg.com/736x/6b/e3/d1/6be3d169bfeeac8e61128c68e4dc3d12.jpg" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">urban_eye</span>
+                    <span class="story-time text-grey">8h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/1200x/e1/86/d6/e186d62249d91e82b3a02ebbf3dce694.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <div id="story-4" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://i.pinimg.com/736x/58/21/89/582189cb48a75bb9150706b6f98aaa4a.jpg" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">chef_mario</span>
+                    <span class="story-time text-grey">12h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/1200x/2d/7d/b1/2d7db12a1f0b42d7ce5c00e290b27cdd.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <div id="story-5" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://i.pinimg.com/736x/41/aa/9f/41aa9ff309b263dafdcb7c9b773c1db4.jpg" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">fitness_goals</span>
+                    <span class="story-time text-grey">14h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/1200x/4c/c8/3d/4cc83df00604b793c1bfc4a0adcaf754.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <div id="story-6" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://i.pinimg.com/736x/43/47/96/434796cb756b478809401fef78a02f64.jpg" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">artistic_soul</span>
+                    <span class="story-time text-grey">18h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/736x/01/fa/aa/01faaad2bbf8ec37eaf8ba98c025d91e.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <div id="story-7" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">sunset_seeker</span>
+                    <span class="story-time text-grey">23h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/474x/36/67/cc/3667cc9abb296716673a9aa34430e4a4.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <div id="story-8" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=256&auto=format&fit=crop" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">nature_lover</span>
+                    <span class="story-time text-grey">1h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/736x/05/dc/eb/05dceb7034f2fc267deede53f6c0de32.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <div id="story-9" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=256&auto=format&fit=crop" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">wildlife_pic</span>
+                    <span class="story-time text-grey">3h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/736x/6c/ac/07/6cac073b71adebed22717363d0e631e4.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <div id="story-10" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=256&auto=format&fit=crop" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">pixel_arch</span>
+                    <span class="story-time text-grey">5h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/736x/d9/39/24/d93924d2c5cdc10234e9ebfad5c1c55c.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <div id="story-11" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=256&auto=format&fit=crop" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">music_vibes</span>
+                    <span class="story-time text-grey">7h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/736x/23/cc/c7/23ccc75281c90c79d8dbab41ab7cfcb9.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <div id="story-12" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=256&auto=format&fit=crop" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">bookworm</span>
+                    <span class="story-time text-grey">9h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/736x/a5/94/2e/a5942e774c6347e9770ef837c52dbcf7.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <div id="story-13" class="story-modal">
+        <a href="#" class="story-modal-scrim" aria-label="Close story"></a>
+        <div class="story-viewer-container">
+            <header class="story-viewer-header">
+                <div class="story-user-details">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=256&auto=format&fit=crop" alt="" class="user-avatar-round size-small">
+                    <span class="username font-weight-bold">fashion_trend</span>
+                    <span class="story-time text-grey">11h</span>
+                </div>
+                <a href="#" class="story-close-btn" aria-label="Close">&times;</a>
+            </header>
+            <div class="story-media-pane">
+                <img src="https://i.pinimg.com/736x/5c/2b/ff/5c2bff8eb164acd715e30025f74a44b1.jpg" alt="Story" class="story-viewer-img">
+            </div>
+        </div>
+    </div>
+    <!-- Stories scroll logic -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById("stories-container");
+            const prevBtn = document.getElementById("stories-scroll-prev");
+            const nextBtn = document.getElementById("stories-scroll-next");
+
+            if (!container || !prevBtn || !nextBtn) return;
+
+            const updateButtonVisibility = () => {
+                const scrollLeft = container.scrollLeft;
+                const maxScrollLeft = container.scrollWidth - container.clientWidth;
+
+                // Show prev button if we scrolled right
+                if (scrollLeft > 5) {
+                    prevBtn.classList.add("visible");
+                } else {
+                    prevBtn.classList.remove("visible");
+                }
+
+                // Show next button if there's more scrollable area to the right
+                if (scrollLeft < maxScrollLeft - 5) {
+                    nextBtn.classList.add("visible");
+                } else {
+                    nextBtn.classList.remove("visible");
+                }
+            };
+
+            // Click handlers
+            prevBtn.addEventListener("click", () => {
+                container.scrollBy({ left: -280, behavior: "smooth" });
+            });
+
+            nextBtn.addEventListener("click", () => {
+                container.scrollBy({ left: 280, behavior: "smooth" });
+            });
+
+            // Listen to scroll events
+            container.addEventListener("scroll", updateButtonVisibility);
+
+            // Initial check (after layout has rendered)
+            setTimeout(updateButtonVisibility, 100);
+
+            // Update on resize
+            window.addEventListener("resize", updateButtonVisibility);
+        });
+    </script>
+</body>
+
+</html>
